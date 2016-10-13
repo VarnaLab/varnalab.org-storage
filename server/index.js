@@ -17,18 +17,16 @@ var sequelize = new Sequelize({
     timestamps: false
   }
 })
-var models = fs.readdirSync(config.models)
-  .reduce((models, file) => {
-    var model = require(path.resolve(config.models, file))
-    models[path.basename(file, '.js')] = model(sequelize, Sequelize)
-    return models
-  }, {})
-
-var routes = require('./routes')
+var models = fs.readdirSync(config.models).reduce((models, file) => {
+  var model = require(path.resolve(config.models, file))
+  models[path.basename(file, '.js')] = model(sequelize, Sequelize)
+  return models
+}, {})
 
 var express = require('express')
 var bodyParser = require('body-parser')
 var logger = require('morgan')
+var routes = require('./routes')
 
 
 var app = express()

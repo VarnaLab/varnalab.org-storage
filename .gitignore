@@ -2,4 +2,5 @@
 *.sqlite
 npm-debug.log
 coverage/
+models/
 node_modules/
