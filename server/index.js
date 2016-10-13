@@ -26,13 +26,13 @@ var models = fs.readdirSync(config.models).reduce((models, file) => {
 var express = require('express')
 var bodyParser = require('body-parser')
 var logger = require('morgan')
-var routes = require('./routes')
+var api = require('./api')
 
 
 var app = express()
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
-app.use(routes(models))
+app.use(api(models))
 
 app.listen(config.port, () => console.log('Oh Hi', config.port, '!'))

@@ -4,9 +4,9 @@ var uuid = require('uuid')
 
 
 module.exports = (m) => {
-  var routes = express()
+  var api = express()
 
-  routes.post('/api/events', (req, res) => {
+  api.post('/api/events', (req, res) => {
     req.body.id = uuid.v1()
     m.events.create(req.body).then((event) => {
       res.writeHead(200, {'content-type': 'application/json'})
@@ -18,5 +18,5 @@ module.exports = (m) => {
     })
   })
 
-  return routes
+  return api
 }

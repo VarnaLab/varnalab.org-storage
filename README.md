@@ -2,7 +2,7 @@
 # 1. Import Database
 
 ```bash
-node schema/imports.js
+node schema/import.js
 ```
 
 
