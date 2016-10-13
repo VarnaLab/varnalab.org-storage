@@ -1,17 +1,14 @@
 {
   "development": {
     "port": 3000,
-    "db": "varnalab.sqlite",
-    "models": "models/"
+    "db": "varnalab.sqlite"
   },
   "staging": {
     "port": 3000,
-    "db": "varnalab.sqlite",
-    "models": "models/"
+    "db": "varnalab.sqlite"
   },
   "production": {
     "port": 3000,
-    "db": "varnalab.sqlite",
-    "models": "models/"
+    "db": "varnalab.sqlite"
   }
 }
