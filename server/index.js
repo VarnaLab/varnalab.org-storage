@@ -33,6 +33,6 @@ var app = express()
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
-app.use(api(models))
+app.use('/api', api(models))
 
 app.listen(config.port, () => console.log('Oh Hi', config.port, '!'))

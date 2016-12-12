@@ -6,7 +6,7 @@ var uuid = require('uuid')
 module.exports = (m) => {
   var api = express()
 
-  api.post('/api/events', (req, res) => {
+  api.post('/events', (req, res) => {
     req.body.id = uuid.v1()
     m.events.create(req.body).then((event) => {
       res.writeHead(200, {'content-type': 'application/json'})
