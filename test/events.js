@@ -5,6 +5,7 @@ var t = require('assert')
 var cp = require('child_process')
 var path = require('path')
 var request = require('request')
+var _import = require('../schema/import')
 var config = require('../config/server')[env]
 
 
@@ -12,11 +13,13 @@ describe('events', () => {
   var server
 
   before((done) => {
-    server = cp.spawn('node', [path.join(__dirname, '../server/index.js')])
-    server.stdout.on('data', (data) => {
-      if (/^Oh Hi/.test(data.toString().trim())) {
-        done()
-      }
+    _import.dump(() => {
+      server = cp.spawn('node', [path.join(__dirname, '../server/index.js')])
+      server.stdout.on('data', (data) => {
+        if (/^Oh Hi/.test(data.toString().trim())) {
+          done()
+        }
+      })
     })
   })
 
