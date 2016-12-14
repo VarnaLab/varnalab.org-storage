@@ -31,7 +31,7 @@ describe('events', () => {
       method: 'GET',
       url: 'http://localhost:' + config.port + '/api/events',
       qs: {
-        created_at: {$gt: '2016-12-12 15:11:14.513 +00:00'}
+        created_at: {$gt: 1482192000000}
       },
       callback: (err, res, body) => {
         if (err) {
@@ -50,11 +50,12 @@ describe('events', () => {
       url: 'http://localhost:' + config.port + '/api/events',
       json: {
         title: 'hey',
-        body: 'amazing',
-        source: 'bot',
+        description: 'amazing',
+        start_at: Date.now(),
         author: 'simo',
-        created_at: new Date(),
-        updated_at: new Date()
+        source: 'test',
+        created_at: Date.now(),
+        updated_at: Date.now()
       },
       callback: (err, res, body) => {
         if (err) {
