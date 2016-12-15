@@ -1,12 +1,30 @@
 
-# 1. Import Database
+# Install
+
+For now clone this repo.
+
+# CLI
 
 ```bash
-node schema/import.js
+./bin/cli -h # for help
 ```
 
+# Start Server
 
-# 2. Generate Models
+```bash
+# start the server at port 3000 and create the varnalab.sqlite file in the current directory
+./bin/cli
+# specify port
+./bin/cli -p 8000
+# specify where you want the varnalab.sqlite file to be created
+./bin/cli -p 8000 -d /path/to/
+# specify existing database file
+./bin/cli -p 8000 -d /path/to/varnalab.sqlite
+```
+
+# Rebuild Models
+
+After each change to the schema the Sequelize models should be rebuilt:
 
 ```bash
 npm install -g sequelize-auto sqlite3
@@ -21,11 +39,4 @@ sequelize-auto \
   --pass null \
   --dialect sqlite \
   --output /...PATH.../models/
-```
-
-
-# 3. Start Server
-
-```bash
-NODE_ENV=production PORT=3000 MODELS=[PATH] node server/
 ```

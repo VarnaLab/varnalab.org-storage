@@ -1,29 +1,24 @@
 
-const env = process.env.NODE_ENV || 'development'
-
 var t = require('assert')
-var cp = require('child_process')
 var path = require('path')
 var request = require('request')
-var _import = require('../schema/import')
-var config = require('../config/server')[env]
+
+var config = {
+  dbpath: path.resolve(__dirname, '../schema/varnalab.sqlite'),
+  port: 3000
+}
+var imp = require('../lib/import')(config)
+var server = require('../server')(config)
 var fixtures = {
   events: require('./fixtures/events')
 }
 
 
 describe('events', () => {
-  var server
 
   before((done) => {
-    _import.dump(() => {
-      server = cp.spawn('node', [path.join(__dirname, '../server/index.js')])
-      server.stdout.on('data', (data) => {
-        if (/^Oh Hi/.test(data.toString().trim())) {
-          done()
-        }
-      })
-    })
+    imp.drop()
+    imp.schema(() => imp.fixtures(() => imp.close(() => server.listen(done))))
   })
 
   it('get events', (done) => {
@@ -82,9 +77,5 @@ describe('events', () => {
         })
       }
     })
-  })
-
-  after(() => {
-    server.kill()
   })
 })
